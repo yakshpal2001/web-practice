@@ -4,6 +4,80 @@
     box-sizing: border-box;
 }
 
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 
+            inset 0 2px 4px rgba(0, 0, 0, 0.9),
+            0 0 15px rgba(212, 175, 55, 0.3);
+    }
+    50% {
+        box-shadow: 
+            inset 0 2px 4px rgba(0, 0, 0, 0.9),
+            0 0 25px rgba(212, 175, 55, 0.6);
+    }
+}
+
+@keyframes buttonPress {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+@keyframes tapeScroll {
+    0%, 100% {
+        background-position: 0% center;
+    }
+    50% {
+        background-position: 100% center;
+    }
+}
+
+@keyframes textPulse {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -31,6 +105,7 @@ body {
     padding: 25px;
     border: 2px solid #1a1a1a;
     position: relative;
+    animation: slideInDown 0.6s ease-out;
 }
 
 .calculator::before {
@@ -62,6 +137,7 @@ body {
     font-weight: bold;
     letter-spacing: 2px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    animation: bounce 2s ease-in-out infinite;
 }
 
 .display-section {
@@ -104,6 +180,7 @@ body {
         0 0 15px rgba(212, 175, 55, 0.3);
     letter-spacing: 1px;
     font-family: 'Courier New', monospace;
+    animation: glow 3s ease-in-out infinite, textPulse 3s ease-in-out infinite;
 }
 
 .tape {
@@ -112,6 +189,7 @@ body {
     margin-top: 12px;
     border-radius: 2px;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+    animation: tapeScroll 3s linear infinite;
 }
 
 .buttons-container {
@@ -141,10 +219,11 @@ body {
     cursor: pointer;
     font-weight: bold;
     letter-spacing: 1px;
-    transition: all 0.1s ease;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
     position: relative;
     font-family: 'Courier New', monospace;
     text-transform: uppercase;
+    overflow: hidden;
 }
 
 .btn::before {
@@ -160,126 +239,136 @@ body {
 }
 
 .num-btn {
-    background: linear-gradient(180deg, #4a4a4a 0%, #2a2a2a 100%);
-    color: #e8e8e8;
+    background: linear-gradient(180deg, #000000 0%, #1a1a1a 100%);
+    color: #ffffff;
     box-shadow: 
         0 6px 12px rgba(0, 0, 0, 0.6),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    border: 1px solid #1a1a1a;
+    border: 1px solid #333333;
 }
 
 .num-btn:hover {
-    background: linear-gradient(180deg, #555 0%, #333 100%);
-    transform: translateY(-2px);
+    background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
+    transform: translateY(-2px) scale(1.05);
     box-shadow: 
         0 8px 16px rgba(0, 0, 0, 0.7),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    animation: bounce 0.4s ease-in-out;
 }
 
 .num-btn:active {
-    transform: translateY(2px);
+    transform: translateY(2px) scale(0.98);
     box-shadow: 
         0 3px 6px rgba(0, 0, 0, 0.6),
         inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    animation: buttonPress 0.3s ease;
 }
 
 .operator-btn {
-    background: linear-gradient(180deg, #c0a024 0%, #8b7a1a 100%);
-    color: #fff;
+    background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+    color: #000000;
     box-shadow: 
         0 6px 12px rgba(0, 0, 0, 0.7),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    border: 1px solid #5a5a1a;
+    border: 1px solid #cccccc;
 }
 
 .operator-btn:hover {
-    background: linear-gradient(180deg, #d4af37 0%, #a89a24 100%);
-    transform: translateY(-2px);
+    background: linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%);
+    transform: translateY(-2px) scale(1.05);
     box-shadow: 
         0 8px 16px rgba(0, 0, 0, 0.8),
         inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    animation: bounce 0.4s ease-in-out;
 }
 
 .operator-btn:active {
-    transform: translateY(2px);
+    transform: translateY(2px) scale(0.98);
     box-shadow: 
         0 3px 6px rgba(0, 0, 0, 0.7),
         inset 0 2px 4px rgba(0, 0, 0, 0.5);
+    animation: buttonPress 0.3s ease;
 }
 
 .clear-btn {
-    background: linear-gradient(180deg, #6b4040 0%, #3d2a2a 100%);
-    color: #ff8c8c;
+    background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+    color: #000000;
     box-shadow: 
         0 6px 12px rgba(0, 0, 0, 0.6),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    border: 1px solid #2a1a1a;
+    border: 1px solid #cccccc;
 }
 
 .clear-btn:hover {
-    background: linear-gradient(180deg, #7d5050 0%, #4d3a3a 100%);
-    transform: translateY(-2px);
+    background: linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%);
+    transform: translateY(-2px) scale(1.05);
     box-shadow: 
         0 8px 16px rgba(0, 0, 0, 0.7),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    animation: bounce 0.4s ease-in-out;
 }
 
 .clear-btn:active {
-    transform: translateY(2px);
+    transform: translateY(2px) scale(0.98);
     box-shadow: 
         0 3px 6px rgba(0, 0, 0, 0.6),
         inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    animation: buttonPress 0.3s ease;
 }
 
 .delete-btn {
-    background: linear-gradient(180deg, #5d5035 0%, #3d2a1a 100%);
-    color: #e8c24c;
+    background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+    color: #000000;
     box-shadow: 
         0 6px 12px rgba(0, 0, 0, 0.6),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    border: 1px solid #2a1a0a;
+    border: 1px solid #cccccc;
 }
 
 .delete-btn:hover {
-    background: linear-gradient(180deg, #7d6a45 0%, #4d3a2a 100%);
-    transform: translateY(-2px);
+    background: linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%);
+    transform: translateY(-2px) scale(1.05);
     box-shadow: 
         0 8px 16px rgba(0, 0, 0, 0.7),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    animation: bounce 0.4s ease-in-out;
 }
 
 .delete-btn:active {
-    transform: translateY(2px);
+    transform: translateY(2px) scale(0.98);
     box-shadow: 
         0 3px 6px rgba(0, 0, 0, 0.6),
         inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    animation: buttonPress 0.3s ease;
 }
 
 .equals-btn {
     width: 100%;
-    background: linear-gradient(180deg, #264d26 0%, #1a3a1a 100%);
-    color: #7eff7e;
+    background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+    color: #000000;
     font-size: 1.5em;
     padding: 20px;
     box-shadow: 
         0 8px 16px rgba(0, 0, 0, 0.7),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    border: 1px solid #0a2a0a;
+    border: 1px solid #cccccc;
 }
 
 .equals-btn:hover {
-    background: linear-gradient(180deg, #2d5d2d 0%, #224a22 100%);
-    transform: translateY(-2px);
+    background: linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%);
+    transform: translateY(-2px) scale(1.05);
     box-shadow: 
         0 10px 20px rgba(0, 0, 0, 0.8),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    animation: bounce 0.4s ease-in-out;
 }
 
 .equals-btn:active {
-    transform: translateY(2px);
+    transform: translateY(2px) scale(0.98);
     box-shadow: 
         0 4px 8px rgba(0, 0, 0, 0.7),
         inset 0 2px 4px rgba(0, 0, 0, 0.5);
+    animation: buttonPress 0.3s ease;
 }
 
 .zero-btn {
